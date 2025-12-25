@@ -2,29 +2,39 @@ import streamlit as st
 import joblib
 import os
 
-# --- 1. Load the Trained AI Models ---
+# --- 1. Smart Model Loader (Fixes Error 13) ---
 @st.cache_resource
 def load_models():
-    try:
-        # Get the current directory
-        base_dir = os.path.dirname(__file__)
-        
-        # Construct paths to the 'models' folder
-        path_clf = os.path.join(base_dir, 'models', 'model_class.pkl')
-        path_reg = os.path.join(base_dir, 'models', 'model_score.pkl')
-        path_vec = os.path.join(base_dir, 'models', 'tfidf.pkl')
+    # List of possible locations for your models (Professional -> Backup)
+    # This ensures it works whether files are in 'models/' or root.
+    base_dir = os.path.dirname(__file__)
+    
+    locations = [
+        os.path.join(base_dir, 'models'),  # Check 'models' folder first
+        base_dir                           # Check main folder as backup
+    ]
+    
+    clf, reg, vectorizer = None, None, None
+    
+    # Helper to find and load a specific file
+    def find_and_load(filename):
+        for loc in locations:
+            path = os.path.join(loc, filename)
+            # Check if file exists AND is actually a file (not a folder)
+            if os.path.exists(path) and os.path.isfile(path):
+                try:
+                    return joblib.load(path)
+                except Exception:
+                    continue # Try next location if load fails
+        return None
 
-        # Load the models
-        clf = joblib.load(path_clf)
-        reg = joblib.load(path_reg)
-        vectorizer = joblib.load(path_vec)
-        
-        return clf, reg, vectorizer
-    except Exception as e:
-        # This error helps us debug if files are missing
-        st.error(f"⚠️ Error loading models. Please check if 'models/model_class.pkl' exists in your repo. Error details: {e}")
-        return None, None, None
+    clf = find_and_load('model_class.pkl')
+    reg = find_and_load('model_score.pkl')
+    vectorizer = find_and_load('tfidf.pkl')
+    
+    return clf, reg, vectorizer
 
+# Load them now
 clf, reg, vectorizer = load_models()
 
 # --- 2. Configure the Page ---
@@ -50,22 +60,23 @@ with col2:
 
 # --- 4. Prediction Logic ---
 if st.button("🚀 Predict Difficulty", use_container_width=True):
-    if not clf:
-        st.error("Models are not loaded. Please check the file structure on GitHub.")
+    if clf is None or vectorizer is None:
+        st.error("⚠️ System Error: Models could not be found.")
+        st.info("Troubleshooting: Please ensure 'model_class.pkl', 'model_score.pkl', and 'tfidf.pkl' are inside the 'models' folder on GitHub.")
     elif not desc_input:
         st.warning("Please enter at least a Problem Description.")
     else:
-        # Combine inputs
+        # A. Preprocessing
         combined_text = f"{desc_input} {inp_input} {out_input}"
         
-        # Convert text to numbers
+        # B. Feature Extraction
         text_vectorized = vectorizer.transform([combined_text])
         
-        # Predict
+        # C. Model Inference
         predicted_class = clf.predict(text_vectorized)[0]
         predicted_score = reg.predict(text_vectorized)[0]
         
-        # Display Results
+        # --- 5. Display Results ---
         st.divider()
         st.subheader("Analysis Results")
         
