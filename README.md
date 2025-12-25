@@ -2,6 +2,12 @@
 
 An AI-powered application that predicts programming problem difficulty using **text analysis** (problem descriptions) and **machine learning**. Built with Scikit-Learn (Random Forest) and Streamlit.
 
+## 📸 Application Demo
+
+Below is a screenshot of the application in action, accurately predicting a "Hard" difficulty problem.
+
+![AutoJudge Application Screenshot](app_screenshot.png)
+
 ## 🚀 Live Demo
 [Link to Live App](https://autojudge-project-fayud3ugxmanel6ejbfaqz.streamlit.app/)
 
@@ -19,14 +25,15 @@ This project uses a **Dual-Model Approach**:
 * **BeautifulSoup** (Web Scraping)
 
 ## 📂 Project Structure
-    task_dataset.json       # Scraped and generated dataset
-    app.py                  # Main Streamlit application
-    train_model.py          # Script to train and save AI models
-    generate_data.py        # Generates synthetic training data
-    scraper.py              # Scrapes problems from Project Euler
-    model_class.pkl         # Trained Classification Model
-    requirements.txt        # List of dependencies
-
+   ├── app.py                 # Main Streamlit application
+├── train_model.py         # AI Training script (Random Forest)
+├── scraper.py             # Web Scraper for Project Euler
+├── visualize.py           # Data visualization script
+├── model_class.pkl        # Trained Difficulty Classifier
+├── model_score.pkl        # Trained Complexity Scorer
+├── tfidf.pkl              # Text Vectorizer
+├── task_dataset.json      # Dataset used for training
+└── requirements.txt       # Dependencies
 ## 💻 How to Run Locally
 
 1. **Clone the repository**
@@ -41,6 +48,11 @@ This project uses a **Dual-Model Approach**:
 
 ## 📊 Dataset
 The model was trained on a hybrid dataset containing real-world problems scraped from **Project Euler** and synthetically generated tasks. The data was processed and cleaned using the `generate_data.py` script.
+
+## 🔮 Future Improvements
+* **Deep Learning:** Upgrade from Random Forest to BERT or LSTM for better text understanding.
+* **More Languages:** Add support for predicting difficulty in C++ and Java specific contexts.
+* **User Feedback:** Allow users to vote on difficulty to retrain the model dynamically.
 
 ---
 *Created by Sumit Solanki*
