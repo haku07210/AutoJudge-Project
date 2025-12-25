@@ -1,17 +1,28 @@
 import streamlit as st
 import joblib
-import pandas as pd
+import os
 
 # --- 1. Load the Trained AI Models ---
 # We use @st.cache_resource so it only loads once (faster)
 @st.cache_resource
 def load_models():
     try:
-        clf = joblib.load('model_class.pkl')
-        reg = joblib.load('model_score.pkl')
-        vectorizer = joblib.load('tfidf.pkl')
+        # Get the current directory where app.py is located
+        base_dir = os.path.dirname(__file__)
+        
+        # Construct specific paths to the 'models' folder
+        path_clf = os.path.join(base_dir, 'models', 'model_class.pkl')
+        path_reg = os.path.join(base_dir, 'models', 'model_score.pkl')
+        path_vec = os.path.join(base_dir, 'models', 'tfidf.pkl')
+
+        # Load the models
+        clf = joblib.load(path_clf)
+        reg = joblib.load(path_reg)
+        vectorizer = joblib.load(path_vec)
+        
         return clf, reg, vectorizer
     except Exception as e:
+        st.error(f"Error loading models. Please ensure the 'models/' folder exists. Details: {e}")
         return None, None, None
 
 clf, reg, vectorizer = load_models()
@@ -23,8 +34,7 @@ st.title("🤖 AutoJudge: Difficulty Predictor")
 st.markdown("### Professional AI System")
 st.markdown("Enter the problem details below to predict its difficulty using Machine Learning.")
 
-# --- 3. The 3 Input Fields (Requirement from PDF) ---
-# The PDF specifically asks for these three separate boxes 
+# --- 3. The 3 Input Fields ---
 col1, col2 = st.columns(2)
 
 with col1:
@@ -41,23 +51,21 @@ with col2:
 # --- 4. Prediction Logic ---
 if st.button("🚀 Predict Difficulty", use_container_width=True):
     if not clf:
-        st.error("Error: Model files not found. Did you run 'train_model.py'?")
+        st.error("Models failed to load. Check your 'models' folder.")
     elif not desc_input:
         st.warning("Please enter at least a Problem Description.")
     else:
-        # A. Preprocessing: Combine all text inputs [cite: 50]
-        # This matches exactly how we trained the model
+        # A. Preprocessing: Combine all text inputs
         combined_text = f"{desc_input} {inp_input} {out_input}"
         
-        # B. Feature Extraction: Convert text to numbers (TF-IDF) 
-        # We must use 'transform', NOT 'fit_transform' (using the training vocabulary)
+        # B. Feature Extraction: Convert text to numbers (TF-IDF)
         text_vectorized = vectorizer.transform([combined_text])
         
         # C. Model Inference
         predicted_class = clf.predict(text_vectorized)[0]  # Easy / Medium / Hard
         predicted_score = reg.predict(text_vectorized)[0]  # Numerical Value
         
-        # --- 5. Display Results [cite: 45] ---
+        # --- 5. Display Results ---
         st.divider()
         st.subheader("Analysis Results")
         
