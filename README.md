@@ -2,14 +2,14 @@
 
 An AI-powered application that predicts programming problem difficulty using **text analysis** (problem descriptions) and **machine learning**. Built with Scikit-Learn (Random Forest) and Streamlit.
 
+## 🎥 Demo Video
+[Watch the Project Demo on YouTube/Drive](https://youtu.be/mFJcVCZhi-Q)
+
 ## 📸 Application Demo
 
 Below is a screenshot of the application in action, accurately predicting a "Hard" difficulty problem.
 
 ![AutoJudge Application Screenshot](app_screenshot.png)
-
-## 🎥 Demo Video
-[Watch the Project Demo on YouTube/Drive]([PASTE_YOUR_LINK_HERE](https://youtu.be/mFJcVCZhi-Q))
 
 ## 🧠 How It Works
 This project uses a **Dual-Model Approach**:
