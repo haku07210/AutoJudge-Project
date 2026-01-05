@@ -9,7 +9,7 @@ Below is a screenshot of the application in action, accurately predicting a "Har
 ![AutoJudge Application Screenshot](app_screenshot.png)
 
 ## 🎥 Demo Video
-[Watch the Project Demo on YouTube/Drive](PASTE_YOUR_LINK_HERE)
+[Watch the Project Demo on YouTube/Drive]([PASTE_YOUR_LINK_HERE](https://youtu.be/mFJcVCZhi-Q))
 
 ## 🧠 How It Works
 This project uses a **Dual-Model Approach**:
